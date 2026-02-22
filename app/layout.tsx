@@ -7,7 +7,7 @@ const _geist = Geist({ subsets: ["latin"] });
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: 'Tufts Smart Meal Planner',
+  title: 'Smart Meal Planner',
   description: 'Plan your dining based on calories, allergies, and preferences',
   icons: {
     icon: [

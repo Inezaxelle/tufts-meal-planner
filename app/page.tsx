@@ -83,7 +83,7 @@ export default function MealPlannerPage() {
               <UtensilsCrossed className="size-5" />
             </div>
             <h1 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl text-balance">
-              Tufts Smart Meal Planner
+              Smart Meal Planner
             </h1>
           </div>
           <p className="text-sm text-muted-foreground text-pretty">

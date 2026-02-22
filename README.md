@@ -1,1 +1,1 @@
-"# tufts-meal-planner" 
+"# meal-planner" 
