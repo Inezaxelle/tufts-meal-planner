@@ -12,6 +12,7 @@ export default function MealPlannerPage() {
   const [datesLoading, setDatesLoading] = useState(true)
   const [date, setDate] = useState("")
   const [calories, setCalories] = useState(500)
+  const [dietType, setDietType] = useState("Standard")
   const [allergens, setAllergens] = useState<string[]>([])
   const [prefs, setPrefs] = useState<string[]>([])
   const [loading, setLoading] = useState(false)
@@ -48,6 +49,7 @@ export default function MealPlannerPage() {
       const params = new URLSearchParams()
       params.append("date", date)
       params.append("calories", String(calories))
+      params.append("diet_type", dietType)
       allergens.forEach((a) => params.append("allergens", a))
       prefs.forEach((p) => params.append("prefs", p))
 
@@ -71,7 +73,7 @@ export default function MealPlannerPage() {
     } finally {
       setLoading(false)
     }
-  }, [date, calories, allergens, prefs])
+  }, [date, calories, dietType, allergens, prefs])
 
   return (
     <div className="min-h-screen bg-background">
@@ -83,7 +85,7 @@ export default function MealPlannerPage() {
               <UtensilsCrossed className="size-5" />
             </div>
             <h1 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl text-balance">
-              Smart Meal Planner
+              Tufts Smart Meal Planner
             </h1>
           </div>
           <p className="text-sm text-muted-foreground text-pretty">
@@ -99,11 +101,13 @@ export default function MealPlannerPage() {
           datesLoading={datesLoading}
           date={date}
           calories={calories}
+          dietType={dietType}
           allergens={allergens}
           prefs={prefs}
           loading={loading}
           onDateChange={setDate}
           onCaloriesChange={setCalories}
+          onDietTypeChange={setDietType}
           onAllergensChange={setAllergens}
           onPrefsChange={setPrefs}
           onSubmit={handleSubmit}

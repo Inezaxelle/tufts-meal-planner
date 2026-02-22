@@ -13,21 +13,21 @@ import {
 } from "@/components/ui/select"
 import { Spinner } from "@/components/ui/spinner"
 import { CheckboxGroup } from "@/components/checkbox-group"
-import { CalendarDays, Flame, ShieldAlert, UtensilsCrossed } from "lucide-react"
-
-const ALLERGEN_OPTIONS = ["Milk", "Egg", "Peanuts", "Soy", "Wheat", "Shellfish"]
-const PREFERENCE_OPTIONS = ["Beef", "Chicken", "Vegan", "Vegetarian", "High Protein", "Low Carb"]
+import { ALL_ALLERGENS, ALL_PREFERENCES, DIET_TYPES } from "@/lib/constants"
+import { CalendarDays, Flame, Leaf, ShieldAlert, UtensilsCrossed } from "lucide-react"
 
 interface MealFormProps {
   availableDates: string[]
   datesLoading: boolean
   date: string
   calories: number
+  dietType: string
   allergens: string[]
   prefs: string[]
   loading: boolean
   onDateChange: (date: string) => void
   onCaloriesChange: (calories: number) => void
+  onDietTypeChange: (dietType: string) => void
   onAllergensChange: (allergens: string[]) => void
   onPrefsChange: (prefs: string[]) => void
   onSubmit: () => void
@@ -38,11 +38,13 @@ export function MealForm({
   datesLoading,
   date,
   calories,
+  dietType,
   allergens,
   prefs,
   loading,
   onDateChange,
   onCaloriesChange,
+  onDietTypeChange,
   onAllergensChange,
   onPrefsChange,
   onSubmit,
@@ -95,7 +97,7 @@ export function MealForm({
         <div className="flex flex-col gap-2">
           <Label htmlFor="calories" className="flex items-center gap-2 text-sm font-medium">
             <Flame className="size-4 text-accent" />
-            Meal Calorie Limit
+            Calorie Limit
           </Label>
           <Input
             id="calories"
@@ -106,6 +108,26 @@ export function MealForm({
           />
         </div>
 
+        {/* Diet Type */}
+        <div className="flex flex-col gap-2">
+          <Label className="flex items-center gap-2 text-sm font-medium">
+            <Leaf className="size-4 text-accent" />
+            Diet Type
+          </Label>
+          <Select value={dietType} onValueChange={onDietTypeChange}>
+            <SelectTrigger className="w-full">
+              <SelectValue placeholder="Select diet type" />
+            </SelectTrigger>
+            <SelectContent>
+              {DIET_TYPES.map((dt) => (
+                <SelectItem key={dt} value={dt}>
+                  {dt}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
+
         {/* Allergies */}
         <div className="flex flex-col gap-2">
           <div className="flex items-center gap-2">
@@ -114,7 +136,7 @@ export function MealForm({
           </div>
           <CheckboxGroup
             label=""
-            options={ALLERGEN_OPTIONS}
+            options={ALL_ALLERGENS}
             selected={allergens}
             onChange={onAllergensChange}
           />
@@ -123,7 +145,7 @@ export function MealForm({
         {/* Preferences */}
         <CheckboxGroup
           label="Preferences"
-          options={PREFERENCE_OPTIONS}
+          options={ALL_PREFERENCES}
           selected={prefs}
           onChange={onPrefsChange}
         />
