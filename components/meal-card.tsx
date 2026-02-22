@@ -79,8 +79,8 @@ export function MealCard({ mealName, hall, items }: MealCardProps) {
         </Badge>
       </CardHeader>
 
-      {/* Items Table */}
-      <CardContent className="px-0 pb-0">
+      {/* Items — Desktop Table (hidden on mobile) */}
+      <CardContent className="hidden px-0 pb-0 md:block">
         <div className="overflow-x-auto">
           <Table>
             <TableHeader>
@@ -141,7 +141,7 @@ export function MealCard({ mealName, hall, items }: MealCardProps) {
           </Table>
         </div>
 
-        {/* Totals Summary Row */}
+        {/* Desktop Totals Summary Row */}
         <div className="flex items-center justify-between border-t border-border/40 bg-muted/30 px-6 py-3">
           <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
             Meal Totals
@@ -160,6 +160,63 @@ export function MealCard({ mealName, hall, items }: MealCardProps) {
               {totalCarbs}g
             </span>
             <span className="flex items-center gap-1 text-xs font-medium text-muted-foreground">
+              <Droplets className="size-3" />
+              {totalFat}g
+            </span>
+          </div>
+        </div>
+      </CardContent>
+
+      {/* Items — Mobile Stacked Cards (hidden on md+) */}
+      <CardContent className="flex flex-col gap-3 px-4 pb-4 md:hidden">
+        {items.map((item, index) => (
+          <div
+            key={index}
+            className="flex flex-col gap-2 rounded-xl border border-border/40 bg-muted/20 px-4 py-3"
+          >
+            <span className="text-sm font-semibold text-foreground">
+              {item.Item}
+            </span>
+            <div className="flex flex-col gap-1.5">
+              <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                <Flame className="size-3 text-primary" />
+                <span className="font-medium text-primary">{item.Cals} cal</span>
+              </div>
+              <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                <Drumstick className="size-3" />
+                <span>Protein: {item.Protein}g</span>
+              </div>
+              <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                <Wheat className="size-3" />
+                <span>Carbs: {item.Carbs}g</span>
+              </div>
+              <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                <Droplets className="size-3" />
+                <span>Fat: {item.Fat}g</span>
+              </div>
+            </div>
+          </div>
+        ))}
+
+        {/* Mobile Totals Summary */}
+        <div className="flex flex-col gap-2 rounded-xl border border-border/40 bg-muted/30 px-4 py-3">
+          <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+            Meal Totals
+          </span>
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="flex items-center gap-1 rounded-full bg-primary/10 px-2.5 py-1 text-xs font-bold text-primary">
+              <Flame className="size-3" />
+              {totalCals} cal
+            </span>
+            <span className="flex items-center gap-1 rounded-full bg-muted/50 px-2 py-1 text-xs font-medium text-muted-foreground">
+              <Drumstick className="size-3" />
+              {totalProtein}g
+            </span>
+            <span className="flex items-center gap-1 rounded-full bg-muted/50 px-2 py-1 text-xs font-medium text-muted-foreground">
+              <Wheat className="size-3" />
+              {totalCarbs}g
+            </span>
+            <span className="flex items-center gap-1 rounded-full bg-muted/50 px-2 py-1 text-xs font-medium text-muted-foreground">
               <Droplets className="size-3" />
               {totalFat}g
             </span>
